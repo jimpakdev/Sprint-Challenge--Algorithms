@@ -98,8 +98,31 @@ class SortingRobot:
         """
         # Fill this out
 
+        # Initiate light value to be ON
+        # While the light_is_on returns True, run the following loop
+        # Set light off in order to recursively invoke the function light_is_on again 
+
+        # Begin the bubble sort with a loop verifying if the robot can move to the right
+        # The robot starts with no items in hand, so use swap_item to pick up the initial item
+        # Robot then moves right, and compares the held item to the item on the ground
+        # If the held item is of higher value, drop the held item and pick up the item on the ground
+        # invoke set_light_on to reset light_is_on to True, firing the loop from the top again
+        # Robot also moves left to former position, drops the item currently held in hand, and moves back right 
+        # Repeat current loop until robot cannot move right 
+
+        # Begin a new loop verifying if the robot can move left
+        # Robot uses swap item to pick up the item on the ground
+        # Robot then moves left and compares the held item to the item on the ground
+        # If the held item is of lower value, drop the held item and pick up the item on the ground
+        # invoke set_light_on to reset light_is_on to True, firing the loop from the top again
+        # Robot also moves right to former position and drop the item on the ground, and move back left
+        # Repeat current loop until robot cannot move left
+        # When the light is remains off, we know the robot has completed sorting
+
+
         # # Run the loop while light_is_on = True
         self.set_light_on()
+        print('sorting')
 
         while self.light_is_on():    
             self.set_light_off()
@@ -107,23 +130,24 @@ class SortingRobot:
             while self.can_move_right():    #### While robot moves right, compare item values
                 self.swap_item()    #### first item pick up
                 self.move_right()
-            if self.compare_item() == 1:    #### if held item is higher value, swap items
-                self.swap_item()
-                self.set_light_on()
-            self.move_left()    #### must swap the None in initial spot with swapped item
-            self.swap_item()    
-            self.move_right()
+                if self.compare_item() == 1:    #### if held item is higher value, swap items
+                    self.swap_item()
+                    self.set_light_on()
+                self.move_left()    #### must swap the None in initial spot with swapped item
+                self.swap_item()    
+                self.move_right()
                 
             while self.can_move_left():
                 self.swap_item()
                 self.move_left()
-            if self.compare_item() == -1:    #### if held item is lesser value, swap items
+                if self.compare_item() == -1:    #### if held item is lesser value, swap items
+                    self.swap_item()
+                    self.set_light_on()
+                self.move_right()
                 self.swap_item()
-                self.set_light_on()
-            self.move_right()
-            self.swap_item()
-            self.move_left()
-   
+                self.move_left()
+
+  
 
 if __name__ == "__main__":
     # Test our your implementation from the command line

@@ -25,7 +25,7 @@ def find_floor_f(n):
                 else:
                     drops += 1
         
-The runtime complexity of this solution is O(n).  The other way I would approach this is with a binary search, but I considered the probability of the initial egg breaking point being located above the midpoint of a given n and went with the linear solution.
+The runtime complexity of this solution is O(n).  This strategy begins from the ground floor, and drops an egg.  If the egg is not broken, move up to the next consecutive floor and repeat the test.  When the egg is broken when dropped, the floor number will be returned.  The other way I would approach this is with a binary search, but I considered the probability of the initial egg breaking point being located above the midpoint of a given n and went with the linear solution.
 
 
 
